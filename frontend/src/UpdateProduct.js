@@ -6,13 +6,14 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { getDateTime } from "./helpers";
+import { updateProduct } from "./api";
 
 const INITIAL_FORM_DATA = {
   productName: "",
   productImg: "",
 };
 
-export default function UpdateProduct({ setUpdating, data }) {
+export default function UpdateProduct({ setUpdating, data, setProductsData }) {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   const handleCancel = () => {
@@ -29,7 +30,11 @@ export default function UpdateProduct({ setUpdating, data }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    updateProduct(data.id, formData).then((res) =>
+      setProductsData((oldData) =>
+        oldData.map((p) => (p.id === data.id ? res : p))
+      )
+    );
     setFormData(INITIAL_FORM_DATA);
     setUpdating(false);
   };

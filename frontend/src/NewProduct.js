@@ -13,7 +13,7 @@ const INITIAL_FORM_DATA = {
   description: "",
 };
 
-export default function NewProduct({ setAddProduct }) {
+export default function NewProduct({ setAddProduct, setProductsData }) {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   const handleCancel = () => {
@@ -30,10 +30,9 @@ export default function NewProduct({ setAddProduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addProduct({ ...formData, creationTime: Date.now() });
-
-    addProduct();
+    addProduct({ ...formData, creationTime: Date.now() }).then((product) =>
+      setProductsData((oldData) => [product, ...oldData])
+    );
     setFormData(INITIAL_FORM_DATA);
     setAddProduct(false);
   };

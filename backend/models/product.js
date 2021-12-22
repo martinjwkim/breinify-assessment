@@ -7,12 +7,13 @@ class Product {
     try {
       let productsjson = fs.readFileSync("./products.json", "utf8");
       let products = JSON.parse(productsjson);
+      console.log("in create function", products);
       let id = products.length + 1;
       products.push({ ...data, id });
 
       fs.writeFileSync("./products.json", JSON.stringify(products));
 
-      return products.find((p) => p.id === id);
+      return products.find((p) => p.id === +id);
     } catch (err) {
       console.error(err);
     }
@@ -30,10 +31,11 @@ class Product {
   }
 
   static async get(id) {
+    const fs = require("fs");
     try {
       let productsjson = fs.readFileSync("./products.json", "utf8");
       let products = JSON.parse(productsjson);
-      let product = products.find((p) => p.id === id);
+      let product = products.find((p) => p.id === +id);
 
       if (!product) throw new NotFoundError(`No product: ${id}`);
 
@@ -44,10 +46,11 @@ class Product {
   }
 
   static async update(id, data) {
+    const fs = require("fs");
     try {
       let productsjson = fs.readFileSync("./products.json", "utf8");
       let products = JSON.parse(productsjson);
-      let productIndex = products.findIndex((p) => p.id === id);
+      let productIndex = products.findIndex((p) => p.id === +id);
 
       if (productIndex < 0) throw new NotFoundError(`No product: ${id}`);
 
@@ -64,10 +67,11 @@ class Product {
   }
 
   static async remove(id) {
+    const fs = require("fs");
     try {
       let productsjson = fs.readFileSync("./products.json", "utf8");
       let products = JSON.parse(productsjson);
-      let productIndex = products.findIndex((p) => p.id === id);
+      let productIndex = products.findIndex((p) => p.id === +id);
 
       if (productIndex < 0) throw new NotFoundError(`No product: ${id}`);
 

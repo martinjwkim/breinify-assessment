@@ -9,10 +9,16 @@ export default function Products({
   direction,
   addProduct,
   setAddProduct,
+  setProductsData,
 }) {
   return (
     <Container className="d-flex flex-column justify-content-center p-0 gap-3">
-      {addProduct && <NewProduct setAddProduct={setAddProduct} />}
+      {addProduct && (
+        <NewProduct
+          setAddProduct={setAddProduct}
+          setProductsData={setProductsData}
+        />
+      )}
       {productsData &&
         productsData
           .filter((product) =>
@@ -26,7 +32,11 @@ export default function Products({
                 : a.creationTime - b.creationTime)
           )
           .map((filteredProduct) => (
-            <ProductCard key={filteredProduct.id} data={filteredProduct} />
+            <ProductCard
+              key={filteredProduct.id}
+              data={filteredProduct}
+              setProductsData={setProductsData}
+            />
           ))}
     </Container>
   );

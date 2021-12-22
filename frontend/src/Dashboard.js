@@ -33,6 +33,7 @@ export default function Dashboard() {
         filter={filter}
         direction={direction}
         setAddProduct={setAddProduct}
+        setProductsData={setProductsData}
         addProduct={addProduct}
       />
     </Container>

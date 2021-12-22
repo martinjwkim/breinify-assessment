@@ -6,8 +6,9 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import UpdateProduct from "./UpdateProduct";
 import { getDateTime } from "./helpers";
+import { deleteProduct } from "./api";
 
-export default function ProductCard({ data }) {
+export default function ProductCard({ data, setProductsData }) {
   const {
     productImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
     productName,
@@ -21,7 +22,11 @@ export default function ProductCard({ data }) {
     setUpdating(true);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    deleteProduct(data.id).then(
+      setProductsData((oldData) => oldData.filter((p) => p.id !== data.id))
+    );
+  };
 
   return (
     <>
@@ -59,7 +64,11 @@ export default function ProductCard({ data }) {
           </Row>
         </Card>
       ) : (
-        <UpdateProduct setUpdating={setUpdating} data={data} />
+        <UpdateProduct
+          setUpdating={setUpdating}
+          data={data}
+          setProductsData={setProductsData}
+        />
       )}
     </>
   );
