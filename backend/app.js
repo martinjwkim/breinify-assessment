@@ -1,14 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const { NotFoundError } = require("./expressError");
-const productRoutes = require("./routes/product");
+const productRoutes = require("./routes/products");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/product", productRoutes);
+app.use("/products", productRoutes);
 
 app.use(function (req, res, next) {
   return next(new NotFoundError());

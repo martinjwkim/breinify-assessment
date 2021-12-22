@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { getDateTime } from "./helpers";
+import { addProduct } from "./api";
 
 const INITIAL_FORM_DATA = {
   productName: "",
@@ -30,8 +30,10 @@ export default function NewProduct({ setAddProduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...formData, creationTime: Date.now() });
-    console.log(getDateTime(Date.now()));
+
+    addProduct({ ...formData, creationTime: Date.now() });
+
+    addProduct();
     setFormData(INITIAL_FORM_DATA);
     setAddProduct(false);
   };

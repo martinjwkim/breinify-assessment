@@ -1,65 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Products from "./Products";
 import Add from "./Add";
 import Filter from "./Filter";
 import Sort from "./Sort";
-
-const data = [
-  {
-    id: 1,
-    productName: "Some Product Name",
-    description: "Some description about a product",
-    creationTime: 1640188731482,
-  },
-  {
-    id: 2,
-    productName: "Some Longer Product Name",
-    description: "Some description about a product",
-    creationTime: 1640288751462,
-  },
-  {
-    id: 3,
-    productName: "Some Extremely Long Product Name",
-    description: "Some description about a product",
-    creationTime: 1640184721782,
-  },
-  {
-    id: 4,
-    productName: "Some Name",
-    description: "Some description about a product",
-    creationTime: 1140188731282,
-  },
-  {
-    id: 5,
-    productName: "Some Product Name",
-    description: "Some description about a product",
-    creationTime: 1643188737282,
-  },
-  {
-    id: 6,
-    productName: "Some Product Name",
-    description: "Some description about a product",
-    creationTime: 1660188751482,
-  },
-  {
-    id: 7,
-    productName: "Some Product Name",
-    description: "Some description about a product",
-    creationTime: 1240186731482,
-  },
-  {
-    id: 8,
-    productName: "Some Product Name",
-    description: "Some description about a product",
-    creationTime: 1610128731482,
-  },
-];
+import { fetchProducts } from "./api";
 
 export default function Dashboard() {
+  const [productsData, setProductsData] = useState(null);
   const [filter, setFilter] = useState("");
   const [addProduct, setAddProduct] = useState(false);
   const [direction, setDirection] = useState(null);
+
+  useEffect(() => {
+    fetchProducts().then((res) => setProductsData(res));
+  }, []);
 
   return (
     <Container
@@ -74,7 +29,7 @@ export default function Dashboard() {
         </Container>
       </Container>
       <Products
-        data={data}
+        productsData={productsData}
         filter={filter}
         direction={direction}
         setAddProduct={setAddProduct}
