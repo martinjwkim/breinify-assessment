@@ -5,7 +5,6 @@
 ### Requirements
 
 - Node.js
-- Express.js
 
 Clone this repo and follow the installation instructions below to run the application on your local machine.
 
