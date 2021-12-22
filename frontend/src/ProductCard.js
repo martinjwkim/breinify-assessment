@@ -35,7 +35,10 @@ export default function ProductCard({ data, setProductsData }) {
           <Row>
             <Col xs={3}>
               <Card.Img
-                src={productImg}
+                src={
+                  productImg ||
+                  "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+                }
                 variant="center"
                 style={{ height: "100%", width: "100%" }}
               />

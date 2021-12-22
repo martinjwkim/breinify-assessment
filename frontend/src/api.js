@@ -8,7 +8,7 @@ const fetchProducts = async () => {
 const addProduct = async (data) => {
   const res = await axios.post("http://localhost:3001/products", {
     ...data,
-    productImg: data.productImg.replace(/['"]+/g, ""),
+    productImg: data.productImg.replace(/(^"|"$)/g, ""),
   });
   return res.data;
 };
@@ -16,7 +16,7 @@ const addProduct = async (data) => {
 const updateProduct = async (id, data) => {
   const res = await axios.patch(`http://localhost:3001/products/${id}`, {
     ...data,
-    productImg: data.productImg.replace(/['"]+/g, ""),
+    productImg: data.productImg.replace(/(^"|"$)/g, ""),
   });
   return res.data;
 };
